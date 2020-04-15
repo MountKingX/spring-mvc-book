@@ -269,8 +269,6 @@
         </module>
         <!-- IntelliJ IDEA formatter configuration -->
         <module name="CustomImportOrder">
-            <property name="sortImportsInGroupAlphabetically" value="false"/>
-            <property name="separateLineBetweenGroups" value="true"/>
             <property name="customImportOrderRules" value="THIRD_PARTY_PACKAGE###STATIC"/>
         </module>
     </module>

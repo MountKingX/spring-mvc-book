@@ -2,6 +2,7 @@ package com.book.mvc.domain.repository.impl;
 
 import com.book.mvc.domain.Product;
 import com.book.mvc.domain.repository.ProductRepository;
+import com.book.mvc.exception.ProductNotFoundException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,11 +48,15 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public Product getProductById(final String productID) {
+    public Product getProductById(final String productId) {
         final String sql = "SELECT * FROM PRODUCTS WHERE ID = :id";
         final Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id", productID);
-        return jdbcTemplate.queryForObject(sql, params, new ProductMapper());
+        params.put("id", productId);
+        try {
+            return jdbcTemplate.queryForObject(sql, params, new ProductMapper());
+        } catch (final DataAccessException e) {
+            throw new ProductNotFoundException(productId);
+        }
     }
 
     @Override

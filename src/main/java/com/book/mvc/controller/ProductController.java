@@ -1,9 +1,12 @@
 package com.book.mvc.controller;
 
 import com.book.mvc.domain.Product;
+import com.book.mvc.exception.NoProductsFoundUnderCategoryException;
+import com.book.mvc.exception.ProductNotFoundException;
 import com.book.mvc.service.ProductService;
 
 import java.io.File;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,15 +42,21 @@ public class ProductController {
     }
 
     @PostMapping("/products/update/stock")
-    public String updateStock() {
+    public String updateStock(final RedirectAttributes redirectAttributes) {
         productService.updateAllStock();
+        redirectAttributes.addFlashAttribute("page_message",
+                "You have successfully updated the stock for # < 500 items!");
         return "redirect:/market/products";
     }
 
     @RequestMapping("/products/{category}")
     public String getProductsByCategory(final @PathVariable("category") String productCategory,
                                         final Model model) {
-        model.addAttribute("products", productService.getProductsByCategory(productCategory));
+        final List<Product> products = productService.getProductsByCategory(productCategory);
+        if (products == null || products.isEmpty()) {
+            throw new NoProductsFoundUnderCategoryException();
+        }
+        model.addAttribute("products", products);
         return "products";
     }
 
@@ -92,6 +102,15 @@ public class ProductController {
         return "redirect:/market/products";
     }
 
+    @ExceptionHandler(ProductNotFoundException.class)
+    public String handleError(final HttpServletRequest req,
+                              final Model model,
+                              final ProductNotFoundException exception) {
+        model.addAttribute("invalidProductId", exception.getProductId());
+        model.addAttribute("exception", exception);
+        model.addAttribute("url", req.getRequestURL() + "?" + req.getQueryString());
+        return "productNotFound";
+    }
 
     // == Form Validation Section ==
     @InitBinder

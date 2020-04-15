@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -40,11 +42,11 @@
                 </span>
                 </p>
                 <p>
-                    <strong>manufacturer</strong> :
+                    <strong>Manufacturer</strong> :
                     ${product.manufacturer}
                 </p>
                 <p>
-                    <strong>category</strong> :
+                    <strong>Category</strong> :
                     ${product.category}
                 </p>
                 <p>
@@ -53,9 +55,11 @@
                 </p>
                 <h4>${product.unitPrice} USD</h4>
                 <p>
-                    <a href="#" class="btn btn-warning btn-large">
-                        <span class="glyphicon-shopping-cart glyphicon">
-                        </span> Order Now
+                    <a href="${contextPath}/market/products"
+                        class="btn btn-success btn-md">
+                        <i class="fas fa-arrow-left"></i> Back</a>
+                    <a href="#" class="btn btn-warning btn-md">
+                        <i class="fas fa-shopping-cart"></i> Order Now
                     </a>
                 </p>
             </div>
