@@ -30,6 +30,8 @@ A Spring Boot coding practice with Spring MVC book
 5. Make sure we are using the correct `JSTL` lib
 6. A more popular in-memory database for spring-boot is H2, here we follow what the mvc book use
 7. It is highly recommended to use `Lombok` package, since @Data has a lot of magics such as saving your time for getters and setters
+8. `message.properties` has some form labels which is similar to configuration in the book
+9. Added the sample for `redirectAttributes.addFlashAttribute`
 
 ---
 last updated on April 14th, 2020

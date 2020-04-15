@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/market")
@@ -66,6 +67,7 @@ public class ProductController {
     @RequestMapping(value = "/products/add", method = RequestMethod.POST)
     public String processAddNewProductForm(final @ModelAttribute("newProduct") Product newProduct,
                                            final BindingResult result,
+                                           final RedirectAttributes redirectAttributes,
                                            final HttpServletRequest request) {
         final String[] suppressedFields = result.getSuppressedFields();
 
@@ -85,6 +87,8 @@ public class ProductController {
             }
         }
         productService.addProduct(newProduct);
+        redirectAttributes.addFlashAttribute("page_message",
+                "You have successfully added a new product item - " + newProduct.getName() + " !");
         return "redirect:/market/products";
     }
 

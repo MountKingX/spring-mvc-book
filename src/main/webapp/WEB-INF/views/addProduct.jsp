@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-lg-2 col-lg-2" for="name">Name</label>
                     <div class="col-lg-10">
                         <form:input id="name" path="name" type="text" class="form:input-large"/>

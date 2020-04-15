@@ -31,6 +31,14 @@
             </div>
         </div>
     </section>
+    <c:if test="${!(empty page_message)}">
+        <div class="alert alert-success alert-dismissible col-sm-12 text-center">
+            <button class="close" type="button" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            <i class="alert">${page_message}</i>
+        </div>
+    </c:if>
     <section class="container">
         <div class="row">
             <c:forEach var="product" items="${products}">
