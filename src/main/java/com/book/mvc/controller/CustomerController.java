@@ -2,7 +2,6 @@ package com.book.mvc.controller;
 
 import com.book.mvc.service.CustomerService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public final class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
+
+    CustomerController(final CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @RequestMapping({ "/customers" })
     public String getHome(final Model model) {

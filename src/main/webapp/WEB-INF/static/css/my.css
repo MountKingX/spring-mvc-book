@@ -1,0 +1,7 @@
+.navbar {
+    box-shadow: 2px 2px 2px #3255a6;
+}
+.navbar .nav-item {
+    font-size: 1.1rem;
+    padding-right: 1.1rem;
+}

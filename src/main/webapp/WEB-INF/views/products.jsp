@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,40 +11,34 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="${contextPath}/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
-    <!-- Font-awesome support v5.8.1-->
-    <link rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"
-          integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm"
-          crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css"
-          integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv"
-          crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css"
-          integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq"
-          crossorigin="anonymous">
-
+    <%@ include file="fragment/_style-external-links.jsp" %>
+    <link href='<spring:url value="/resources/css/my.css"/>' rel="stylesheet" />
     <title>Products</title>
 </head>
 <body>
+    <%@ include file="fragment/_naviBar.jsp" %>
     <section>
-        <div class="jumbotron">
+        <div class="jumbotron mb-2 py-3">
             <div class="container">
                 <h1>Products</h1>
                 <p>All the available products in our store</p>
+                <div class="row mt-2">
+                    <span class="mx-3 pt-2">
+                         Click button in the right to add a item:
+                    </span>
+                    <a href="${contextPath}/market/products/add" class="btn-success btn-lg"> Add a New Item </a>
+                </div>
             </div>
         </div>
     </section>
     <section class="container">
         <div class="row">
             <c:forEach var="product" items="${products}">
-                <div class="col-sm-6 col-md-3" style="padding-bottom: 15px;">
+                <div class="col-sm-6 col-md-4 col-lg-3" style="padding-bottom: 15px;">
                     <div class="card bg-light">
                         <div class="card-header">
                             <img src="<c:url value="/resources/img/${product.productId}.png" />"
-                                 alt="image" style="width:100%"/>
+                                 alt="image" style="width: 100%; max-height: 160px"/>
                         </div>
                         <div class="card-body align-content-stretch">
                             <div class="card-title">
@@ -54,7 +49,7 @@
                             <p>${product.unitPrice} USD</p>
                             <p>Available <b>${product.unitsInStock}</b> units in stock</p>
                             <p>
-                                <a href=" <spring:url value="/market/product?id=${product.productId}" /> " class="btn btn-primary">
+                                <a href=" <spring:url value="/market/product?id=${product.productId}" /> " class="btn btn-info">
                                     <i class="fas fa-info"></i> Details
                                 </a>
                             </p>
@@ -63,27 +58,24 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="row mt-xl-5">
+        <div class="row mt-2">
             <span class="mx-3 py-2">
                 Click the button in the right to update stock for units < 500:
             </span>
-            <a class="btn-warning btn-lg"
-                href="${contextPath}/market/products/update/stock">
-                Update +1000 units
-            </a>
+            <form:form method="POST" action="${contextPath}/market/products/update/stock">
+                <input type="submit"
+                       class="btn-warning btn-lg"
+                       value="Update +1000 units">
+            </form:form>
         </div>
-        <div class="row mt-3">
-            <span class="mx-3 py-2">
-                 Click button in the right to add a item:
-            </span>
-            <a href="${contextPath}/market/products/add" class="btn-success btn-lg"> Add New Item </a>
-        </div>
-        <div class="row mt-3">
-            <ul>
-                <li>Click <a href="${contextPath}/" class="btn-primary">here</a> to go to index page</li>
-                <li>Click <a href="${contextPath}/customers" class="btn-secondary">here</a> to go to customers page</li>
+        <div class="row mt-4">
+            <ul class="mt-2">
+                <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/customers" class="btn-lg btn-primary">View our Customers</a></li>
+                <li class="my-3">Click the right button to go to Index page <a href="${contextPath}/" class="btn btn-secondary">Back to Index Page</a></li>
             </ul>
         </div>
     </section>
+    <%@ include file="fragment/_footer.jsp" %>
+    <%@ include file="fragment/_scripts-external-links.jsp" %>
 </body>
 </html>

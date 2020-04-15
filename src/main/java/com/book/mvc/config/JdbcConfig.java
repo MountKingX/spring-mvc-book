@@ -15,12 +15,12 @@ public class JdbcConfig {
     @Bean
     public DataSource dataSource() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        final EmbeddedDatabase db = builder
+        final EmbeddedDatabase database = builder
                 .setType(EmbeddedDatabaseType.HSQL)
                 .addScript("db/sql/create-table.sql")
                 .addScript("db/sql/insert-data.sql")
                 .build();
-        return db;
+        return database;
     }
 
     @Bean

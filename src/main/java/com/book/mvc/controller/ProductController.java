@@ -3,10 +3,9 @@ package com.book.mvc.controller;
 import com.book.mvc.domain.Product;
 import com.book.mvc.service.ProductService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/market")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    @RequestMapping("/products/update/stock")
-    public String updateStock() {
-        productService.updateAllStock();
-        return "redirect:/products";
+    ProductController(final ProductService productService) {
+        this.productService = productService;
     }
 
     @RequestMapping("/products")
@@ -39,12 +36,16 @@ public class ProductController {
         return "products";
     }
 
+    @PostMapping("/products/update/stock")
+    public String updateStock() {
+        productService.updateAllStock();
+        return "redirect:/market/products";
+    }
+
     @RequestMapping("/products/{category}")
-    public String getProductsByCategory(final Model model,
-                                        final @PathVariable("category") String productCategory
-    ) {
-        model.addAttribute("products",
-                productService.getProductsByCategory(productCategory));
+    public String getProductsByCategory(final @PathVariable("category") String productCategory,
+                                        final Model model) {
+        model.addAttribute("products", productService.getProductsByCategory(productCategory));
         return "products";
     }
 
@@ -67,22 +68,18 @@ public class ProductController {
                                            final BindingResult result,
                                            final HttpServletRequest request) {
         final String[] suppressedFields = result.getSuppressedFields();
+
         if (suppressedFields.length > 0) {
             throw new RuntimeException("Attempting to bind disallowed fields: "
                     + StringUtils.arrayToCommaDelimitedString(suppressedFields));
         }
+
         final MultipartFile productImage = newProduct.getProductImage();
-        final String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-        System.out.println("@@@ rootDirectory is: " + rootDirectory);
+        final String rootDirectory = request.getSession().getServletContext().getRealPath("/WEB-INF");
         if (productImage != null && !productImage.isEmpty()) {
-            System.out.println("We are good here");
-            final int length = rootDirectory.length();
-            System.out.println("@@@ rootDirectory - 7  is: " + rootDirectory.substring(0, length - 8));
             try {
-                productImage.transferTo(new
-                        File(rootDirectory.substring(0, length - 7) + "resources/static/img/"
+                productImage.transferTo(new File(rootDirectory + "/static/img/"
                         + newProduct.getProductId() + ".png"));
-                System.out.println("\n ==>" + rootDirectory.substring(0, length - 7) + "resources/static/img/");
             } catch (final Exception e) {
                 throw new RuntimeException("Product Image saving failed", e);
             }
@@ -91,6 +88,8 @@ public class ProductController {
         return "redirect:/market/products";
     }
 
+
+    // == Form Validation Section ==
     @InitBinder
     public void initialiseBinder(final WebDataBinder binder) {
         binder.setAllowedFields("productId",
@@ -101,6 +100,7 @@ public class ProductController {
                 "category",
                 "unitsInStock",
                 "productImage",
-                "condition");
+                "condition"
+        );
     }
 }

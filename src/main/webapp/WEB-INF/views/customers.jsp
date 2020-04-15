@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%@ include file="fragment/_style-external-links.jsp" %>
+    <link href='<spring:url value="/resources/css/my.css"/>' rel="stylesheet" />
     <title>Customers</title>
-    <link rel="stylesheet" href="${contextPath}/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
-<%--    <link rel="stylesheet"--%>
-<%--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"--%>
-<%--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"--%>
-<%--          crossorigin="anonymous">--%>
 </head>
 <body>
+    <%@ include file="fragment/_naviBar.jsp" %>
     <div class="container">
         <div class="mt-3">
             <h1>List of customers in our DB</h1>
@@ -37,13 +38,12 @@
                 </div>
             </c:forEach>
         </div>
-        <ul>
-            <li>Click <a href="${contextPath}/" class="btn-primary">here</a> to go to index page</li>
-            <li>Click <a href="${contextPath}/market/products" class="btn-success">here</a> to go to products page</li>
+        <ul class="mt-5">
+            <li class="my-3">Click the right button to go to products page <a href="${contextPath}/market/products" class="btn-lg btn-success">View our Products</a> </li>
+            <li class="my-3">Click the right button to go to Index page <a href="${contextPath}/" class="btn btn-secondary">Back to Index Page</a></li>
         </ul>
     </div>
-    <script src="${contextPath}/webjars/jquery/3.4.1/jquery.min.js"></script>
-    <script src="${contextPath}/webjars/popper.js/1.16.0/popper.min.js"></script>
-    <script src="${contextPath}/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <%@ include file="fragment/_footer.jsp" %>
+    <%@ include file="fragment/_scripts-external-links.jsp" %>
 </body>
 </html>
