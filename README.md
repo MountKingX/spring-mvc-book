@@ -4,7 +4,7 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 ## How to run it
 * import project as gradle one with IntelliJ
 * run class MvcApplication (`com.book.mvc.MvcApplication.java`) or its main() function, 
-* in browser, visit localhost:8080 or localhost:8080/index
+* in browser, visit localhost:8080 or localhost:8080/index (not /webstore as the root url)
 
 ## Contents included
 * Chapter 1: Configuring a Spring Development Environment
@@ -17,7 +17,7 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 ## Some specifications
 1. In a standard spring-boot2 project, ServletInitializer is not required, here I kept it as spring.io initialize the project with it. 
    I guess it is because that I selected .war as the deployment file.
-2. I think `.war` plugin in (at file build.gradle line 5: id 'war') is required, since JSP needs `tomcat` and `tomcat-embed-jasper`, 
+2. It appears that `.war` plugin in (at file build.gradle line 5: id 'war') is required, since JSP needs `tomcat` and `tomcat-embed-jasper`, 
    while the default container for spring-boot should be jetty.
 3. We use jsp as view resolver so configure it at file /resources/application.properties:
     ```bash
@@ -33,9 +33,19 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 7. It is highly recommended to use `Lombok` package, since @Data has a lot of magics such as saving your time for getters and setters
 8. `message.properties` has some form labels which is similar to configuration in the book
 9. Added the sample for `redirectAttributes.addFlashAttribute`
-10. Not successfully to view xml and json Product in Chapter 5
-11. We might need to change `log4j.appender.file.File=` to your local directory to store the log. For example, I am using Ubuntu so I set it `/home/kangmin/log4j/webstore-performance.log`
-12. Added `redirected message` for `PromoCodeInterceptor` when redirecting to products page
+10. Right now, this project is not successfully to view xml and json Product in Chapter 5
+11. We might need to change `log4j.appender.file.File=` to your local directory to store the log. For example, I am using Ubuntu so I set it as`/home/kangmin/log4j/webstore-performance.log`:
+    ```bash
+    ...
+    # Direct log messages to a log file
+    log4j.appender.file=org.apache.log4j.RollingFileAppender
+    log4j.appender.file.File=/home/kangmin/log4j/webstore-performance.log
+    ...
+    ```
+12. ProcessingTimeLogInterceptor generates more logs than the mvc-book, as a result of using webjars: we store the css/js within this webapp
+13. Added `redirected message` for `PromoCodeInterceptor` when redirecting to products page
+14. We can use Session and Interceptors to handle Authentication & Authorization, the code is implemented in branch MVC-Session
+ 
 
 ---
 last updated on April 14th, 2020
