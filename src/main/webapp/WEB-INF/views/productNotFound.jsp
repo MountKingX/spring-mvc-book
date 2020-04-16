@@ -20,13 +20,16 @@
             <div class="container">
                 <h1 class="alert alert-danger"> There is no
                     product found with the Product id
+                    <%--@elvariable id="invalidProductId" type="java.lang.String"--%>
                     ${invalidProductId}</h1>
             </div>
         </div>
     </section>
     <section>
         <div class="container">
+            <%--@elvariable id="url" type="java.lang.String"--%>
             <p>${url}</p>
+            <%--@elvariable id="exception" type="java.lang.String"--%>
             <p>${exception}</p>
         </div>
         <div class="container">
