@@ -44,3 +44,17 @@ INSERT INTO CUSTOMERS VALUES (
     '5678 Skill Ave, Austin, TX 78758',
     22.0
 );
+
+INSERT INTO ACCOUNTS VALUES (
+    'normal',
+    'Mr. Normal',
+    '123',
+    'NORMAL'
+);
+
+INSERT INTO ACCOUNTS VALUES (
+    'admin',
+    'Mr. Admin',
+    '123',
+    'ADMIN'
+);

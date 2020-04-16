@@ -13,4 +13,9 @@ public final class IndexController {
         model.addAttribute("tagline", "The one and only amazing web store");
         return "index";
     }
+
+    @RequestMapping("/access-denied")
+    public final String accessForbiddenPage() {
+        return "access-denied";
+    }
 }

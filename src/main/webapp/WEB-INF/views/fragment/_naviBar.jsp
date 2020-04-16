@@ -16,22 +16,17 @@
         <ul class="navbar-nav mr-auto">
             <c:if test="${!(empty sessionScope.account) || !(empty sessionScope.admin)}">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${contextPath}/home">
-                        <i class="fas fa-home"></i>&nbsp;Home
+                    <a class="nav-link" href="${contextPath}/market/products">
+                        <i class="fas fa-book"></i>&nbsp;Products
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="${contextPath}/customers">
+                        <i class="fas fa-users"></i>&nbsp;Customers
                     </a>
                 </li>
             </c:if>
-            <li class="nav-item active">
-                <a class="nav-link" href="${contextPath}/market/products">
-                    <i class="fas fa-book"></i>&nbsp;Products
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="${contextPath}/customers">
-                    <i class="fas fa-users"></i>&nbsp;Customers
-                </a>
-            </li>
             <c:if test="${!(empty sessionScope.admin)}">
                 <li class="nav-item active">
                     <a class="nav-link" href="${contextPath}/private/admin">
@@ -39,25 +34,34 @@
                     </a>
                 </li>
             </c:if>
+            <form:form method="POST" id="logout-form"
+                       action="${contextPath}/account/logout">
+            </form:form>
         </ul>
 
         <ul class="navbar-nav ml-auto">
-<%--            <c:if test="${!(empty sessionScope.account) || !(empty sessionScope.admin)}">--%>
-<%--                <li class="nav-item active">--%>
-<%--                    <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit();">--%>
-<%--                        <i class="fas fa-power-off"></i>--%>
-<%--                        &nbsp;Logout--%>
-<%--                    </a>--%>
-<%--                </li>--%>
-<%--            </c:if>--%>
-<%--            <c:if test="${(empty sessionScope.account) && (empty sessionScope.admin)}">--%>
-<%--                <li class="nav-item active">--%>
-<%--                    <a class="nav-link" href="${contextPath}/account/login">--%>
-<%--                        <i class="fas fa-unlock-alt"></i>--%>
-<%--                        &nbsp;Login--%>
-<%--                    </a>--%>
-<%--                </li>--%>
-<%--            </c:if>--%>
+            <c:if test="${!(empty sessionScope.account) || !(empty sessionScope.admin)}">
+                <li class="nav-item active">
+                    <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit();">
+                        <i class="fas fa-power-off"></i>
+                        &nbsp;Logout
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${(empty sessionScope.account) && (empty sessionScope.admin)}">
+                <li class="nav-item active">
+                    <a class="nav-link" href="${contextPath}/account/login">
+                        <i class="fas fa-unlock-alt"></i>
+                        &nbsp;Login
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="${contextPath}/account/register">
+                        <i class="fas fa-unlock-alt"></i>
+                        &nbsp;Register
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </div>
 </nav>

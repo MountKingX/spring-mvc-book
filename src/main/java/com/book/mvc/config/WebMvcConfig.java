@@ -1,5 +1,7 @@
 package com.book.mvc.config;
 
+import com.book.mvc.interceptor.AdminPrivilegeHandlerInterceptor;
+import com.book.mvc.interceptor.LoginSessionHandlerInterceptor;
 import com.book.mvc.interceptor.ProcessingTimeLogInterceptor;
 
 import com.book.mvc.interceptor.PromoCodeInterceptor;
@@ -50,10 +52,34 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return promoCodeInterceptor;
     }
 
+    @Bean
+    LoginSessionHandlerInterceptor loginSessionFilter() {
+        return new LoginSessionHandlerInterceptor();
+    }
+
+    @Bean
+    AdminPrivilegeHandlerInterceptor adminPrivilegeFilter() {
+        return new AdminPrivilegeHandlerInterceptor();
+    }
+
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
 
-        registry.addInterceptor(processingTimeLogInterceptor());
+        registry.addInterceptor(loginSessionFilter())
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/resources/**",
+                        "/webjars/**",
+                        "", "/", "/index", "/welcome",
+                        "/access-denied",
+                        "/account/login",
+                        "/account/register",
+                        "/account/logout");
+
+        registry.addInterceptor(adminPrivilegeFilter())
+                .addPathPatterns("/private/**");
+
+        //registry.addInterceptor(processingTimeLogInterceptor());
 
         registry.addInterceptor(localeChangeInterceptor());
 
