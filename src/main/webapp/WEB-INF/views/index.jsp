@@ -23,10 +23,24 @@
         <div class="container">
             <h1> ${greeting} </h1>
             <p> ${tagline} </p>
-            <ul class="mt-5">
-                <li class="my-3">Click the right button to go to products page <a href="${contextPath}/market/products" class="btn-lg btn-success">View our products</a> </li>
-                <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/customers" class="btn-lg btn-primary">View our Customers</a></li>
-            </ul>
+            <div class="mt-4 pt-2">
+                <h5>Primary links</h5>
+                <ul class="mt-2">
+                    <li class="my-3">Click the right button to go to products page <a href="${contextPath}/market/products" class="btn-lg btn-success">View our products</a> </li>
+                    <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/customers" class="btn-lg btn-primary">View our Customers</a></li>
+                </ul>
+            </div>
+            <div class="mt-4 pt-2">
+                <h5>Testing Promotions</h5>
+                <div class="mt-3">
+                    View incorrect promotion offer :
+                    <a href="${contextPath}/market/products/specialOffer?promo=offer" class="btn-danger btn-lg"> promo=offer </a>
+                </div>
+                <div class="mt-3">
+                    View correct promotion offer :
+                    <a href="${contextPath}/market/products/specialOffer?promo=OFF3R" class="btn-info btn-lg"> promo=OFF3R </a>
+                </div>
+            </div>
         </div>
     </div>
     <%@ include file="fragment/_footer.jsp" %>

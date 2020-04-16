@@ -1,5 +1,5 @@
 # spring-mvc-book
-A Spring Boot coding practice with Spring MVC book
+A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 
 ## How to run it
 * import project as gradle one with IntelliJ
@@ -12,6 +12,7 @@ A Spring Boot coding practice with Spring MVC book
 * Chapter 3: Control Your Store with Controllers
 * Chapter 4: Working with Spring Tag Libraries
 * Chapter 5: Working with View Resolver
+* Chapter 6: Internalize Your Store with Interceptor
 
 ## Some specifications
 1. In a standard spring-boot2 project, ServletInitializer is not required, here I kept it as spring.io initialize the project with it. 
@@ -33,6 +34,8 @@ A Spring Boot coding practice with Spring MVC book
 8. `message.properties` has some form labels which is similar to configuration in the book
 9. Added the sample for `redirectAttributes.addFlashAttribute`
 10. Not successfully to view xml and json Product in Chapter 5
+11. We might need to change `log4j.appender.file.File=` to your local directory to store the log. For example, I am using Ubuntu so I set it `/home/kangmin/log4j/webstore-performance.log`
+12. Added `redirected message` for `PromoCodeInterceptor` when redirecting to products page
 
 ---
 last updated on April 14th, 2020

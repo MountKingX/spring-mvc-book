@@ -1,11 +1,21 @@
 package com.book.mvc.config;
 
+import com.book.mvc.interceptor.ProcessingTimeLogInterceptor;
+
+import com.book.mvc.interceptor.PromoCodeInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import java.util.Locale;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -16,6 +26,46 @@ public class WebMvcConfig implements WebMvcConfigurer {
         messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
+    }
+
+    @Bean
+    public ProcessingTimeLogInterceptor processingTimeLogInterceptor() {
+        return new ProcessingTimeLogInterceptor();
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        final LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("language");
+        return localeChangeInterceptor;
+    }
+
+    @Bean
+    public HandlerInterceptor promoCodeInterceptor() {
+        final PromoCodeInterceptor promoCodeInterceptor = new PromoCodeInterceptor();
+        promoCodeInterceptor.setPromoCode("OFF3R");
+        promoCodeInterceptor.setOfferRedirect(
+                "market/products?message=Redirected from validated promotion code");
+        promoCodeInterceptor.setErrorRedirect("invalidPromoCode");
+        return promoCodeInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(final InterceptorRegistry registry) {
+
+        registry.addInterceptor(processingTimeLogInterceptor());
+
+        registry.addInterceptor(localeChangeInterceptor());
+
+        registry.addInterceptor(promoCodeInterceptor())
+                .addPathPatterns("/**/market/products/specialOffer");
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        final SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(new Locale("en"));
+        return resolver;
     }
 
     @Bean

@@ -5,10 +5,6 @@ import com.book.mvc.exception.NoProductsFoundUnderCategoryException;
 import com.book.mvc.exception.ProductNotFoundException;
 import com.book.mvc.service.ProductService;
 
-import java.io.File;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -24,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.File;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/market")
@@ -110,6 +110,11 @@ public class ProductController {
         model.addAttribute("exception", exception);
         model.addAttribute("url", req.getRequestURL() + "?" + req.getQueryString());
         return "productNotFound";
+    }
+
+    @RequestMapping("/products/invalidPromoCode")
+    public String invalidPromoCode() {
+        return "invalidPromoCode";
     }
 
     // == Form Validation Section ==
