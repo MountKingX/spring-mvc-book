@@ -35,5 +35,8 @@
             This will only be displayed if authenticated user has role ROLE_ADMIN.
         </security:authorize>
     </div>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <%@ include file="fragment/_footer.jsp" %>
+    <%@ include file="fragment/_scripts-external-links.jsp" %>
 </body>
 </html>

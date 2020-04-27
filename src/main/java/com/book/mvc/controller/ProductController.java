@@ -5,6 +5,7 @@ import com.book.mvc.exception.NoProductsFoundUnderCategoryException;
 import com.book.mvc.exception.ProductNotFoundException;
 import com.book.mvc.service.ProductService;
 
+import com.book.mvc.validator.ProductValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -24,15 +25,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/market")
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductValidator productValidator;
 
-    ProductController(final ProductService productService) {
+    ProductController(final ProductService productService,
+                      final ProductValidator productValidator) {
         this.productService = productService;
+        this.productValidator = productValidator;
     }
 
     @RequestMapping("/products")
@@ -75,7 +80,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/add", method = RequestMethod.POST)
-    public String processAddNewProductForm(final @ModelAttribute("newProduct") Product newProduct,
+    public String processAddNewProductForm(final @ModelAttribute("newProduct") @Valid Product newProduct,
                                            final BindingResult result,
                                            final RedirectAttributes redirectAttributes,
                                            final HttpServletRequest request) {
@@ -84,6 +89,11 @@ public class ProductController {
         if (suppressedFields.length > 0) {
             throw new RuntimeException("Attempting to bind disallowed fields: "
                     + StringUtils.arrayToCommaDelimitedString(suppressedFields));
+        }
+
+        // == form validation ==
+        if (result.hasErrors()) {
+            return "addProduct";
         }
 
         final MultipartFile productImage = newProduct.getProductImage();
@@ -120,6 +130,7 @@ public class ProductController {
     // == Form Validation Section ==
     @InitBinder
     public void initialiseBinder(final WebDataBinder binder) {
+        binder.setValidator(productValidator);
         binder.setAllowedFields("productId",
                 "name",
                 "unitPrice",

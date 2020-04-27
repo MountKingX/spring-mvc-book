@@ -78,5 +78,8 @@
             </div>
         </div>
     </div>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <%@ include file="fragment/_footer.jsp" %>
+    <%@ include file="fragment/_scripts-external-links.jsp" %>
 </body>
 </html>
