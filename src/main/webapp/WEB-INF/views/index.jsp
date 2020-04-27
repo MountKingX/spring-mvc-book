@@ -19,6 +19,7 @@
 </head>
 <body>
     <%@ include file="fragment/_naviBar.jsp" %>
+    <%@ include file="./fragment/_flash_message.jsp" %>
     <div class="jumbotron">
         <div class="container">
             <h1> ${greeting} </h1>

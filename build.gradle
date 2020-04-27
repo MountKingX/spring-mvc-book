@@ -36,6 +36,11 @@ dependencies {
 	implementation 'org.hsqldb:hsqldb:2.5.0'
 	// runtimeOnly 'com.h2database:h2'
 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+// https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs
+	compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.3.1.RELEASE'
+
 	compile 'org.webjars:bootstrap:4.4.1'
 	compile 'org.webjars:datatables:1.10.19'
 	compile 'org.webjars:font-awesome:5.13.0'

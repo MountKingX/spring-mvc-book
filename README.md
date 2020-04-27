@@ -13,6 +13,7 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 * Chapter 4: Working with Spring Tag Libraries
 * Chapter 5: Working with View Resolver
 * Chapter 6: Internalize Your Store with Interceptor
+* Chapter 7: Incorporating Spring Security
 
 ## Some specifications
 1. In a standard spring-boot2 project, ServletInitializer is not required, here I kept it as spring.io initialize the project with it. 
@@ -44,8 +45,10 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
     ```
 12. ProcessingTimeLogInterceptor generates more logs than the mvc-book, as a result of using webjars: we store the css/js within this webapp
 13. Added `redirected message` for `PromoCodeInterceptor` when redirecting to products page
-14. We can use Session and Interceptors to handle Authentication & Authorization, the code is implemented in branch MVC-Session
- 
+14. We can use Session and Interceptors to handle Authentication & Authorization, the code is implemented in branch MVC-Session with user/password pairs: ('normal', 123), ('admin', 123)
+15. Simple Configuration of Spring Security: using static inMemoryAuthentication() instead of DB users: ('john', ''pa55word'), ('admin', 'root123');
+16. As the requirement of Spring-5, a Bean of `BCryptPasswordEncoder` is configured;
+17. In jsp, we can take advantage of security tag and show things when necessary: `<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>`
 
 ---
-last updated on April 14th, 2020
+last updated on April 26th, 2020
