@@ -15,7 +15,7 @@ public final class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping({ "/customers" })
+    @RequestMapping({ "/market/customers" })
     public String getHome(final Model model) {
         model.addAttribute("customers",  customerService.getAllCustomers());
         return "customers";

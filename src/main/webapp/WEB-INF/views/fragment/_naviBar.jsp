@@ -22,7 +22,7 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="${contextPath}/customers">
+                    <a class="nav-link" href="${contextPath}/market/customers">
                         <i class="fas fa-users"></i>&nbsp;Customers
                     </a>
                 </li>

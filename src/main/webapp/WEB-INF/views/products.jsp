@@ -89,7 +89,7 @@
         </div>
         <div class="row mt-4">
             <ul class="mt-2">
-                <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/customers" class="btn-lg btn-primary">View our Customers</a></li>
+                <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/market/customers" class="btn-lg btn-primary">View our Customers</a></li>
                 <li class="my-3">Click the right button to go to Index page <a href="${contextPath}/" class="btn btn-secondary">Back to Index Page</a></li>
             </ul>
         </div>

@@ -28,7 +28,7 @@
                 <h5>Primary links</h5>
                 <ul class="mt-2">
                     <li class="my-3">Click the right button to go to products page <a href="${contextPath}/market/products" class="btn-lg btn-success">View our products</a> </li>
-                    <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/customers" class="btn-lg btn-primary">View our Customers</a></li>
+                    <li class="my-3">Click the right button to go to customers page <a href="${contextPath}/market/customers" class="btn-lg btn-primary">View our Customers</a></li>
                 </ul>
             </div>
             <div class="mt-4 pt-2">

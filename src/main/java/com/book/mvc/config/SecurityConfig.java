@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalSecurity(final AuthenticationManagerBuilder auth) throws Exception {
+
         auth.inMemoryAuthentication()
                 .withUser("john")
                 .password(passwordEncoder.encode("pa55word"))
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.exceptionHandling().accessDeniedPage("/login?accessDenied");
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/index", "/login", "/register").permitAll()
                 .antMatchers("/**/add").access("hasRole('ADMIN')")
                 .antMatchers("/**/market/**").access("hasRole('USER')");
 
