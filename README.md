@@ -15,6 +15,7 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 * Chapter 6: Internalize Your Store with Interceptor
 * Chapter 7: Incorporating Spring Security
 * Chapter 8: Validate Your Products with a Validator
+* Chapter 9: Give REST to Your Application with Ajax
 
 ## Some specifications
 1. In a standard spring-boot2 project, ServletInitializer is not required, here I kept it as spring.io initialize the project with it. 
@@ -50,7 +51,8 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 15. Simple Configuration of Spring Security: using static inMemoryAuthentication() instead of DB users: ('john', ''pa55word'), ('admin', 'root123');
 16. As the requirement of Spring-5, a Bean of `BCryptPasswordEncoder` is configured;
 17. In jsp, we can take advantage of security tag and show things when necessary: `<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>`
-18. Qualifier is added for `ProductValidator` 's javax.validation.Validator beanValidator attribute, which is for `LocalValidatorFactoryBean` at WebMvcConfig.java;
+18. Qualifier added for `ProductValidator` 's javax.validation.Validator beanValidator attribute, which is for `LocalValidatorFactoryBean` at WebMvcConfig.java;
+19. Ajax calls from Angular.js were not achieved
 
 ---
 last updated on April 26th, 2020

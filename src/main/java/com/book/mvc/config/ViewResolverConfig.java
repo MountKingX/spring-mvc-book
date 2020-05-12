@@ -1,9 +1,29 @@
 package com.book.mvc.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import java.util.Locale;
 
 @Configuration
 public class ViewResolverConfig {
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        final SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(new Locale("en"));
+        return resolver;
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        final CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("utf-8");
+        return resolver;
+    }
 
     //    @Bean
     //    public MappingJackson2JsonView jsonView() {

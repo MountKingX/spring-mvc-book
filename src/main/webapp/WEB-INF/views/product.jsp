@@ -15,6 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%@ include file="fragment/_style-external-links.jsp" %>
     <link href='<spring:url value="/resources/css/my.css"/>' rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
+    <script src="<c:url value="${contextPath}/resources/js/controller.js" />"></script>
     <title>Product Detail</title>
 </head>
 <body>
@@ -26,7 +28,7 @@
             </div>
         </div>
     </section>
-    <section class="container">
+    <section class="container" ng-app="cartApp">
         <div class="row">
             <div class="col-md-5">
                 <img src="<c:url value="${contextPath}/resources/img/${product.productId}.png" />"
@@ -54,12 +56,16 @@
                     ${product.unitsInStock}
                 </p>
                 <h4>${product.unitPrice} USD</h4>
-                <p>
+                <p ng-controller="cartCtrl">
                     <a href="${contextPath}/market/products"
                         class="btn btn-success btn-md">
                         <i class="fas fa-arrow-left"></i> Back</a>
-                    <a href="#" class="btn btn-warning btn-md">
-                        <i class="fas fa-shopping-cart"></i> Order Now
+                    <a href="#" class="btn btn-warning btn-md"
+                       ng-click="addToCart('${product.productId}')">
+                        <i class="fas fa-shopping-bag"></i> Order Now
+                    </a>
+                    <a href="<spring:url value="/market/cart" />" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> View Cart
                     </a>
                 </p>
             </div>

@@ -40,6 +40,12 @@
             <c:choose>
                 <c:when test="${pageContext.request.userPrincipal.authenticated}">
                     <li class="nav-item active">
+                        <a class="nav-link" href="${contextPath}/market/cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            &nbsp;Cart
+                        </a>
+                    </li>
+                    <li class="nav-item active">
                         <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit();">
                             <i class="fas fa-power-off"></i>
                             &nbsp;Logout

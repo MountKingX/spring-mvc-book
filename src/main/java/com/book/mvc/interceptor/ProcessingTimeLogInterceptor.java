@@ -27,7 +27,7 @@ public class ProcessingTimeLogInterceptor implements HandlerInterceptor {
         final String path = request.getRequestURL() + queryString;
         final long startTime = (Long) request.getAttribute("startTime");
         final long endTime = System.currentTimeMillis();
-        if (!path.contains("resources")) {
+        if (!path.contains("resources") && !path.contains("webjars")) {
             LOGGER.info(String.format("%s millisecond taken to process the request %s.",(endTime - startTime), path));
         }
     }
