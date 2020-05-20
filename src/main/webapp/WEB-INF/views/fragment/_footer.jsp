@@ -2,7 +2,7 @@
     <div class="pt-3 pb-2 bg-light text-dark">
         <div>
             <p class="text-center">
-                &copy; 2020 by Product Intel. All rights reserved. (last updated on April-26-2020)
+                &copy; 2020 by Product Intel. All rights reserved. (last updated on May-20-2020)
             </p>
         </div>
     </div>

@@ -4,7 +4,7 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 ## How to run it
 * import project as gradle one with IntelliJ
 * run class MvcApplication (`com.book.mvc.MvcApplication.java`) or its main() function, 
-* in browser, visit localhost:8080 or localhost:8080/index (not /webstore as the root url)
+* in Browser, visit localhost:8080 or localhost:8080/index (not /webstore as the root url)
 
 ## Contents included
 * Chapter 1: Configuring a Spring Development Environment
@@ -16,6 +16,7 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 * Chapter 7: Incorporating Spring Security
 * Chapter 8: Validate Your Products with a Validator
 * Chapter 9: Give REST to Your Application with Ajax
+* Chapter 12: Testing Your Application
 
 ## Some specifications
 1. In a standard spring-boot2 project, ServletInitializer is not required, here I kept it as spring.io initialize the project with it. 
@@ -53,6 +54,11 @@ A Spring Boot coding practice with Spring MVC book (gradle, JSP)
 17. In jsp, we can take advantage of security tag and show things when necessary: `<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>`
 18. Qualifier added for `ProductValidator` 's javax.validation.Validator beanValidator attribute, which is for `LocalValidatorFactoryBean` at WebMvcConfig.java;
 19. Ajax calls from Angular.js were not achieved
+20. In Testing Your Application chapter's code, find a bug for `cartItem.setProduct(iphone);`
+21. For Integration Testing's @ContextConfiguration, use `(classes = MvcApplication.class)` instead of `WebMvcConfig`
+22. For MVC controller test, we will use `MockMvcBuilders.standaloneSetup(pc)` instead of `MockMvcBuilders.webAppContextSetup(this.wac)`
+
+* Book spring mvc beginner's guide github: https://github.com/PacktPublishing/Spring-MVC-Beginners-Guide-Second-Edition
 
 ---
-last updated on April 26th, 2020
+last updated on May 20th, 2020
